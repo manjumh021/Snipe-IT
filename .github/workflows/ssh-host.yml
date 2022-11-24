@@ -10,8 +10,17 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: 13.56.229.47
+        host: "13.56.229.47"
         username: ubuntu
         key: ${{ secrets.AWS_PRIVATE_KEY }}
         port: 22
         script: cd /home/ubuntu/manju && ls -a
+    - name: ls -a via ssh
+      uses: nerd4ever/ssh-action@master
+      with:
+        command: |
+          cd /tmp
+          ls -a
+        host: 13.56.229.47
+        user: ubuntu
+        key: ${{ secrets.AWS_PRIVATE_KEY}}
