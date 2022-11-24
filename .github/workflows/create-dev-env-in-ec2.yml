@@ -2,7 +2,11 @@ name: 'Create Developer Environment in ec2'
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+env:
+  TF_IN_AUTOMATION: true
+  TF_WORKSPACE: -dev
+  TF_BACKEND_PATH: dev.tfvars
+  TF_VAR_tf_backend_bucket_name: terraform-vpc-state
 jobs:
   terraform:
     name: 'Terraform'
