@@ -47,7 +47,7 @@ resource "aws_security_group" "main" {
       security_groups  = []
       self             = false
       to_port          = 22
-    }
+    },
     {
       cidr_blocks      = ["0.0.0.0/0", ]
       description      = ""
