@@ -52,7 +52,7 @@ resource "aws_security_group" "main" {
       protocol         = "-1"
       security_groups  = []
       self             = false
-      to_port          = 22
+      to_port          = 0
     }
   ]
 }
