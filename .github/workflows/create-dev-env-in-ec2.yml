@@ -1,8 +1,5 @@
-name: 'Terraform'
+name: 'Create Developer Environment in ec2'
 on:
-  push:
-    branches:
-      - main
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -19,9 +16,6 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - uses: actions/checkout@v2
       - name: Configure AWS credential
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,7 +52,4 @@ jobs:
       - name: Terraform Apply
         run: |
           cd terraform/create-ec2
-          terraform apply -auto-approve -input=false 
-
-      # - name: Terraform destroy
-      #   run: terraform destroy -auto-approve -input=false 
+          terraform apply -auto-approve -input=false
