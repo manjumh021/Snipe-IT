@@ -15,8 +15,9 @@ provider "aws" {
 resource "aws_instance" "snipe-it_server" {
   ami           = "ami-02ea247e531eb3ce6"
   instance_type = "t2.micro"
-
+  key_name               = "aws-manju-key2"
+  vpc_security_group_ids = [sg-0b20fefb47205d6ba]
   tags = {
-    Name = "terraform-practice"
+    Name = "dev-environment"
   }
 }
