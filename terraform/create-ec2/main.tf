@@ -17,6 +17,12 @@ resource "aws_instance" "snipe-it_server" {
   instance_type = "t2.micro"
   key_name               = "aws-manju-key2"
   vpc_security_group_ids = [sg-0b20fefb47205d6ba]
+  connection {
+    type    = "ssh"
+    host    = self.public_ip
+    user    = "ubuntu"
+    timeout = "4m"
+  }
   tags = {
     Name = "dev-environment"
   }
