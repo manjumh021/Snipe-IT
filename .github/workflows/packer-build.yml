@@ -15,6 +15,6 @@ jobs:
           #aws_session_token: ${{ secrets.AWS_SESSION_TOKEN}}
           aws-region: us-west-1
       - run: |
-          cd create-ec2-image/amazon.pkr.hcl
+          cd create-ec2-image
           packer init .
           packer build .
