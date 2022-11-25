@@ -2,6 +2,7 @@
 
 - name: Install Docker and Docker Compose on CentOS
   hosts: all
+  connection: local
   become: true
 
   tasks:
