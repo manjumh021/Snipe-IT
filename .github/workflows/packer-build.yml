@@ -11,8 +11,7 @@ jobs:
       - name: Packer build
         uses: riznob/packer-build-action@v1.5
         with:
-          templateFile: 'packer-template.json'
-          varFile: 'amazon.pkr.hcl'
+          templateFile: 'amazon.pkr.hcl'
           workingDir: './create-ec2-image'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
