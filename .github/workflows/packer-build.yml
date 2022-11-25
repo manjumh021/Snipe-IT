@@ -7,12 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v1
-      - name: Packer build
-        uses: riznob/packer-build-action@v1.5
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          workingDir: './create-ec2-image'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-west-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          #aws_session_token: ${{ secrets.AWS_SESSION_TOKEN}}
+          aws-region: us-west-1
+      - run: |
+          cd create-ec2-image/amazon.pkr.hcl
+          packer init .
+          packer build .
