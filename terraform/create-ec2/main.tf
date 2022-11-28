@@ -57,7 +57,6 @@ locals {
 
 resource "aws_security_group" "main" {
    name   = "resource_with_dynamic_block"
-   vpc_id = data.aws_vpc.main.id
 
    dynamic "ingress" {
       for_each = local.ingress_rules
