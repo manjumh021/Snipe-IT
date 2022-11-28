@@ -20,6 +20,14 @@ resource "aws_instance" "snipe-it_server" {
   user_data = "${file("install-ansible.sh")}"
   vpc_security_group_ids = [aws_security_group.main.id]
   
+  connection {
+		type        = "ssh"
+		host        = self.public_ip
+		user        = "ubuntu"
+		private_key = file("aws_key")
+		timeout     = "10m"
+	}
+
   provisioner "file" {
     source      = "./docker-dc-install.yml"
     destination = "/home/ubuntu/docker-dc-install.yml"
@@ -32,13 +40,7 @@ resource "aws_instance" "snipe-it_server" {
     ]
   }
 
-  connection {
-		type        = "ssh"
-		host        = self.public_ip
-		user        = "ubuntu"
-		private_key = file("aws_key")
-		timeout     = "4m"
-	}
+  
   tags = {
     Name = "dev-environment"
   }
