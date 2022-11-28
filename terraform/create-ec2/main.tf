@@ -17,7 +17,7 @@ resource "aws_instance" "snipe-it_server" {
   instance_type = "t2.micro"
   count = 1
   key_name = "aws-manju-key2"
-  user_data = ${file("install-ansible.sh")}"
+  user_data = "${file("install-ansible.sh")}"
   vpc_security_group_ids = [aws_security_group.main.id]
   
   provisioner "file" {
