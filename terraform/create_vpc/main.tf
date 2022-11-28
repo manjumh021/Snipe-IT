@@ -49,7 +49,7 @@ resource "aws_route" "routeIGW" {
 resource "aws_subnet" "pub-a" {
   vpc_id     = aws_vpc.customVPC.id
   cidr_block = "10.0.0.0/28"
-  availability_zone = "us-east-1a"
+  availability_zone = "ap-south-1a"
 
   tags = {
     Name = "Public - a"
@@ -59,7 +59,7 @@ resource "aws_subnet" "pub-a" {
 resource "aws_subnet" "pub-b" {
   vpc_id     = aws_vpc.customVPC.id
   cidr_block = "10.0.0.16/28"
-  availability_zone = "us-east-1b"
+  availability_zone = "ap-south-1b"
 
   tags = {
     Name = "Public - b"
