@@ -27,7 +27,7 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Copy key
-        id: 
+        id: copy
         run: |
           cd terraform/create-ec2
           echo ${{ secrets.AWS_ACCESS_KEY_ID }} >> aws_key
@@ -57,7 +57,7 @@ jobs:
           terraform apply -auto-approve -input=false
 
       - name: remove key
-        id: 
+        id: remove
         run: |
           cd terraform/create-ec2
           rm -rf aws_key
