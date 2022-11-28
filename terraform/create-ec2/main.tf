@@ -14,7 +14,7 @@ provider "aws" {
 
 terraform {
     backend "s3" {
-        bucket = "terraform-s3-bucket"
+        bucket = "manju-terraform-s3-bucket"
         key    = "terraform/terraform.tfstate"
         region     = "us-west-1"
     }
