@@ -38,7 +38,7 @@ jobs:
         run: terraform destroy -auto-approve -input=false
 
       - name: Terraform Pull the state
-        id: pull
+        id: push
         run: |
           cd terraform/create_vpc
           terraform state push        
