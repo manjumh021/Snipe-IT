@@ -1,0 +1,63 @@
+name: 'Create VPC'
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+env:
+  TF_IN_AUTOMATION: true
+  TF_WORKSPACE: -dev
+  TF_BACKEND_PATH: dev.tfvars
+  TF_VAR_tf_backend_bucket_name: terraform-vpc-state
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS credential
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-west-1"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.3.2
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Copy key
+        id: copy
+        run: |
+          cd terraform/create_vpc
+          echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+      - name: Terraform Init
+        id: init 
+        run: |
+          cd terraform/create_vpc
+          terraform init
+
+      - name: Terraform Pull the state
+        id: pull
+        run: |
+          cd terraform/create_vpc
+          terraform state pull
+
+      - name: Terraform Validate
+        id: validate
+        run: |
+          cd terraform/create_vpc
+          terraform validate -no-color
+              
+      - name: Terraform Plan
+        id: plan
+        run: |
+          cd terraform/create_vpc
+          terraform plan -no-color -input=false 
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: |
+          cd terraform/create_vpc
+          terraform apply -auto-approve -input=false
