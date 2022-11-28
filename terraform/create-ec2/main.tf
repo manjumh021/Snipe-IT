@@ -12,6 +12,14 @@ provider "aws" {
   region  = "us-west-1"
 }
 
+terraform {
+    backend "s3" {
+        bucket = "terraform-s3-bucket"
+        key    = "terraform/terraform.tfstate"
+        region     = "us-west-1"
+    }
+}
+
 resource "aws_instance" "snipe-it_server" {
   ami = "ami-02ea247e531eb3ce6"
   instance_type = "t2.micro"
@@ -37,6 +45,8 @@ resource "aws_instance" "snipe-it_server" {
     inline = [
       "cd /home/ubuntu/docker-dc-install.yml",
       "ansible-playbook docker-dc-install.yml",
+      "git clone https://github.com/manjumh021/Snipe-IT.git",
+      "docker-compose up -d"
     ]
   }
 

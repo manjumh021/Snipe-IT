@@ -37,7 +37,13 @@ jobs:
         run: |
           cd terraform/create-ec2
           terraform init
-          
+
+      - name: Terraform Pull the state
+        id: pull
+        run: |
+          cd terraform/create-ec2
+          terraform state pull
+
       - name: Terraform Validate
         id: validate
         run: |
