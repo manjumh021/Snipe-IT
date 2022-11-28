@@ -36,7 +36,7 @@ resource "aws_instance" "snipe-it_server" {
 		type        = "ssh"
 		host        = self.public_ip
 		user        = "ubuntu"
-		private_key = ${{ secrets.AWS_PRIVATE_KEY }}
+		private_key = "${{ secrets.AWS_PRIVATE_KEY }}"
 		timeout     = "4m"
 	}
   tags = {
